@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springapp
+  labels:
+    app: springapp
+  annotations:
+spec:
+  selector:
+    matchLabels:
+      app: springapp
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: springapp
+    spec:
+      containers:
+      - name: springapp
+        image: bsarathkumar42/myspringimage:1
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+        volumeMounts:
+        - name: secret-volume
+          mountPath: /secrets/
+        - name: config-volume
+          mountPath: /configs/
+      volumes:
+      - name: springapp
+        secret:
+          secretName: springapp
+      - name: config-volume
+        configMap:
+          name: springapp #name of our configmap object
