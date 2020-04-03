@@ -8,12 +8,12 @@ spec:
   source:
     repoURL: https://github.com/bsarathkumar42/testargocd.git
     targetRevision: HEAD
-    path: testargocd/argo/springapp
+    path: argo/springapp
     directory:
       recurse: true
   destination:
     server: https://kubernetes.default.svc
-    namespace: springapp
+    namespace: springapp 
   syncPolicy:
     automated:
       prune: false
