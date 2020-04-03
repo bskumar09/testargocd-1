@@ -9,7 +9,7 @@ spec:
   selector:
     matchLabels:
       name: springapp
-  replicas: 2
+  replicas: 3
   strategy:
     type: RollingUpdate
     rollingUpdate:
