@@ -26,3 +26,17 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: springapp
+  name: springapp
+spec:
+  type: NodePort
+  ports:
+  - port: 8080
+    targetPort: 8080
+  selector:
+    name: springapp
